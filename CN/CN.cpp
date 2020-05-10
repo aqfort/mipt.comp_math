@@ -101,7 +101,7 @@ void PRINT_TO_FILE(const vector<vector<double>> & DATA,
                    const string & NAME) {
     ofstream out(NAME);
     long flag = out.precision();
-    out << fixed << setprecision(1);
+    out << fixed << setprecision(7);
 
     for(int t = 0; t <= T; t++) {
         for(int x = 0; x <= H; x++) {
