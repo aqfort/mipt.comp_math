@@ -129,7 +129,7 @@ COLS: 1
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 
-Gauss–Seidel is faster and difference = 0.002055 sec!!!
+Successive over-relaxation is faster and difference = 0 sec!!!
 
 
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----

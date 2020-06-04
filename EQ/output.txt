@@ -3,12 +3,13 @@ F(u) = A * u - exp(-u) = 0
 for each iteration:
 J(k) * x(k) = F(u(k))   -->   x(k)
 u(k + 1) = u(k) - x(k)
-it continues untill CubeNorm of 'nevyazka' = CubeNorm(F(u(k))) = CubeNorm(A * u(k) - exp(-u(k))) < EPS
+NEV = F - J * x
+It continues untill CubeNorm of 'NEV' = CubeNorm(F(u(k))) = CubeNorm(A * u(k) - exp(-u(k))) < EPS
 EPS = 1e-06
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-matrix A:
+MATRIX A:
 ROWS: 6
 COLS: 6
                    4                   -1                    0                    0                    0                    0 
@@ -18,7 +19,7 @@ COLS: 6
                    0                    0                    0                   -1                    4                   -1 
                    0                    0                    0                    0                   -1                    4 
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-starter vector u:
+STARTER VECTOR u:
 ROWS: 6
 COLS: 1
                    1 
@@ -33,12 +34,12 @@ COLS: 1
 Gauss–Seidel is used to solve: J * x = F
 
 
-norm[1] = 2.63212
-norm[2] = 0.141117
-norm[3] = 0.000641377
-norm[4] = 5.17604e-07
+CubeNorm[1] = 2.63212
+CubeNorm[2] = 0.141117
+CubeNorm[3] = 0.000641377
+CubeNorm[4] = 5.17604e-07
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-vector u:
+VECTOR u:
 ROWS: 6
 COLS: 1
    0.273682041316179 
@@ -50,7 +51,7 @@ COLS: 1
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 
-spent time: 0.003184 sec!
+SPENT TIME: 0 sec!
 
 
 ----- ----- ----- ----- ----- ----- ----- ----- ----- -----

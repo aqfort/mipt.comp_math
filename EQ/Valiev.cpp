@@ -4,8 +4,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <math.h>
-
+#include <cmath>
 #include <ctime>
 
 #define T_SZ long
@@ -142,7 +141,7 @@ istream &operator>>(istream &in, Matrix &matrix) {
     string line;
     getline(in, line);
     stringstream line_stream(line);
-    line_stream >> new_ROWS >> ws; // eat up any leading white spaces
+    line_stream >> new_ROWS >> ws; //eat up any leading white spaces
     if(line_stream.peek() == EOF) {
         new_COLS = new_ROWS;
     } else {
@@ -278,13 +277,16 @@ Matrix GaussSeidelStep(const Matrix &A, const Matrix &b, const Matrix &x) {
 
 int main(int argc, char *argv[], char *env[]) {
     try{
-        if(argc < 2) {
-            throw invalid_argument("argc: not enough arguments");
-        }
-        Matrix A;
-        //ifstream input(MY_FILE);
-        ifstream input(argv[1]);
         ofstream out(MY_FILE_OUT);
+
+        if(argc != 1) {
+            throw invalid_argument("argc");
+        }
+
+        ifstream input(MY_FILE);
+
+        Matrix A;
+        
         input >> A;
 
         clock_t t0, t1;
@@ -305,7 +307,8 @@ int main(int argc, char *argv[], char *env[]) {
         out << "for each iteration:\n";
         out << "J(k) * x(k) = F(u(k))   -->   x(k)\n";
         out << "u(k + 1) = u(k) - x(k)\n";
-        out << "it continues untill CubeNorm of \'nevyazka\' = CubeNorm(F(u(k))) = CubeNorm(A * u(k) - exp(-u(k))) < EPS\n";
+        out << "NEV = F - J * x\n";
+        out << "It continues untill CubeNorm of \'NEV\' = CubeNorm(F(u(k))) = CubeNorm(A * u(k) - exp(-u(k))) < EPS\n";
         out << "EPS = " << EPS << '\n';
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n\n";
 
@@ -316,9 +319,9 @@ int main(int argc, char *argv[], char *env[]) {
         }
 
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n";
-        out << "matrix A:\n" << A << endl;
+        out << "MATRIX A:\n" << A << endl;
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n";
-        out << "starter vector u:\n" << u << endl;
+        out << "STARTER VECTOR u:\n" << u << endl;
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n";
 
         out << "\n\nGauss–Seidel is used to solve: J * x = F\n\n\n";
@@ -345,7 +348,7 @@ int main(int argc, char *argv[], char *env[]) {
             }
 
             F_norm = F.CubeNorm();
-            out << "norm[" << iterator << "] = " << F_norm << endl;
+            out << "CubeNorm[" << iterator << "] = " << F_norm << endl;
 
             u = u - x;
         } while(F_norm > EPS);
@@ -354,10 +357,10 @@ int main(int argc, char *argv[], char *env[]) {
         t1 = clock();
 
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n";
-        out << "vector u:\n" << u << endl;
+        out << "VECTOR u:\n" << u << endl;
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n";
 
-        out << "\n\nspent time: " << (double) (t1 - t0) / CLOCKS_PER_SEC << " sec!\n\n\n";
+        out << "\n\nSPENT TIME: " << (double) (t1 - t0) / CLOCKS_PER_SEC << " sec!\n\n\n";
 
         out << "----- ----- ----- ----- ----- ----- ----- ----- ----- -----\n";
 
